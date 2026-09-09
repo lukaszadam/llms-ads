@@ -204,7 +204,7 @@ p {
 }
 
 /* SECTIONS */
-.problem, .faq, .how-it-works { padding: 5rem 2rem; border-bottom: 1px solid var(--border); }
+.problem, .faq, .how-it-works, .what-we-do { padding: 5rem 2rem; border-bottom: 1px solid var(--border); }
 .why-now, .objections { padding: 5rem 2rem; background: var(--light); border-bottom: 1px solid var(--border); }
 .for-whom { padding: 5rem 0; border-bottom: 1px solid var(--border); }
 
