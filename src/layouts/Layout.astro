@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  pubDate?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-default.jpg',
+  type = 'website',
+  pubDate,
+} = Astro.props;
+
+const siteUrl = 'https://llm-ads.de';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const fullTitle = title === 'LLM Ads' ? title : `${title} | LLM Ads`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="LLM Ads" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+    {pubDate && <meta property="article:published_time" content={pubDate} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": type === 'article' ? "Article" : "ProfessionalService",
+      "name": "LLM Ads",
+      "url": siteUrl,
+      "description": "Wir sorgen dafür, dass dein Unternehmen in den Antworten von ChatGPT, Gemini und Co. auftaucht.",
+      "areaServed": "DE",
+      "availableLanguage": "Deutsch",
+    })} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <a href="/" class="logo">llm-ads</a>
+        <div class="nav-links">
+          <a href="/#was-wir-machen">Leistungen</a>
+          <a href="/#wie-es-funktioniert">So funktioniert's</a>
+          <a href="/blog">Blog</a>
+        </div>
+        <a href="/#gespraech" class="btn-nav">Kostenloses Erstgespräch</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <div class="container">
+        <span>© {new Date().getFullYear()} LLM Ads</span>
+        <div class="footer-links">
+          <a href="/blog">Blog</a>
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

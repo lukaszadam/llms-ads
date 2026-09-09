@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM Ads – KI-Sichtbarkeit für dein Unternehmen</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <span class="logo">llm-ads</span>
-      <a href="#gespraech" class="btn-nav">Kostenloses Erstgespräch</a>
-    </div>
-  </nav>
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout
+  title="LLM Ads"
+  description="Dein Unternehmen als Antwort von ChatGPT, Gemini & Co. Wir sorgen für KI-Sichtbarkeit, GEO und ChatGPT Ads – messbar und transparent."
+>
 
   <!-- HERO -->
   <section class="hero">
@@ -29,7 +25,7 @@
         </div>
       </div>
       <div class="hero-right">
-        <div class="feature-grid">
+        <div class="feature-grid" id="was-wir-machen">
           <div class="feature">
             <span class="icon">&#x2b;</span>
             <h3>KI-Sichtbarkeit (GEO)</h3>
@@ -158,6 +154,30 @@
     </div>
   </section>
 
+  <!-- BLOG PREVIEW -->
+  {posts.length > 0 && (
+    <section class="blog-index" style="border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <div class="blog-header">
+          <p class="eyebrow">VOM BLOG</p>
+          <h2>Insights zu KI-Marketing & GEO</h2>
+        </div>
+        <div class="post-grid">
+          {posts.map(post => (
+            <a href={`/blog/${post.id}`} class="post-card">
+              <div class="post-card-body">
+                <p class="post-date">{post.data.pubDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+              </div>
+              <div class="post-card-footer">Artikel lesen →</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- CTA -->
   <section class="cta-section" id="gespraech">
     <div class="container narrow center">
@@ -195,16 +215,4 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <span>© 2026 llm-ads</span>
-      <div class="footer-links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+</Layout>
