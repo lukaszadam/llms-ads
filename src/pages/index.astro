@@ -1,10 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
 ---
 
 <Layout
@@ -167,30 +162,6 @@ const posts = (await getCollection('blog'))
       </div>
     </div>
   </section>
-
-  <!-- BLOG PREVIEW -->
-  {posts.length > 0 && (
-    <section class="blog-index" style="border-bottom: 1px solid var(--border);">
-      <div class="container">
-        <div class="blog-header">
-          <p class="eyebrow">VOM BLOG</p>
-          <h2>Insights zu KI-Marketing & GEO</h2>
-        </div>
-        <div class="post-grid">
-          {posts.map(post => (
-            <a href={`/blog/${post.id}`} class="post-card">
-              <div class="post-card-body">
-                <p class="post-date">{post.data.pubDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
-                <h2>{post.data.title}</h2>
-                <p>{post.data.description}</p>
-              </div>
-              <div class="post-card-footer">Artikel lesen →</div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- CTA -->
   <section class="cta-section" id="gespraech">
