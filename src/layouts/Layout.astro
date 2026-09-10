@@ -21,7 +21,7 @@ const {
 
 const siteUrl = 'https://llm-ads.de';
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
-const fullTitle = title === 'LLM Ads' ? title : `${title} | LLM Ads`;
+const fullTitle = title === 'ChatGPT Ads Agentur' ? title : `${title} | ChatGPT Ads Agentur`;
 ---
 
 <!doctype html>
@@ -55,7 +55,7 @@ const fullTitle = title === 'LLM Ads' ? title : `${title} | LLM Ads`;
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": type === 'article' ? "Article" : "ProfessionalService",
-      "name": "LLM Ads",
+      "name": "ChatGPT Ads Agentur",
       "url": siteUrl,
       "description": "Wir sorgen dafür, dass dein Unternehmen in den Antworten von ChatGPT, Gemini und Co. auftaucht.",
       "areaServed": "DE",
@@ -71,7 +71,7 @@ const fullTitle = title === 'LLM Ads' ? title : `${title} | LLM Ads`;
   <body>
     <nav>
       <div class="nav-inner">
-        <a href="/" class="logo">llm-ads</a>
+        <a href="/" class="logo">ChatGPT Ads Agentur</a>
         <div class="nav-links">
           <a href="/#was-wir-machen">Leistungen</a>
           <a href="/#wie-es-funktioniert">So funktioniert's</a>
@@ -84,7 +84,7 @@ const fullTitle = title === 'LLM Ads' ? title : `${title} | LLM Ads`;
 
     <footer>
       <div class="container">
-        <span>© {new Date().getFullYear()} LLM Ads</span>
+        <span>© {new Date().getFullYear()} ChatGPT Ads Agentur</span>
         <div class="footer-links">
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
