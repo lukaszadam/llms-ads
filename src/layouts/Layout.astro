@@ -41,16 +41,14 @@ const fullTitle = title === 'ChatGPT Ads Agentur' ? title : `${title} | ChatGPT 
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content="LLM Ads" />
+    <meta property="og:site_name" content="ChatGPT Ads Agentur" />
     <meta property="og:locale" content="de_DE" />
-    <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
     {pubDate && <meta property="article:published_time" content={pubDate} />}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
