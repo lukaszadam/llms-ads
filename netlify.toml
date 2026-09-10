@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+
+[[redirects]]
   from = "https://llmsads.netlify.app/*"
   to = "https://llms-ads.de/:splat"
   status = 301
