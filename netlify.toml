@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://llmsads.netlify.app/*"
+  to = "https://llms-ads.de/:splat"
+  status = 301
+  force = true
