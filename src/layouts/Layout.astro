@@ -28,7 +28,7 @@ const {
   extraJsonLd = [],
 } = Astro.props;
 
-const siteUrl = 'https://llm-ads.de';
+const siteUrl = 'https://llms-ads.de';
 const abs = (path: string) => new URL(path, siteUrl).href;
 const canonicalUrl = canonical ?? abs(Astro.url.pathname);
 const otherLocale = t.lang === 'de' ? en : de;

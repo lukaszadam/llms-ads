@@ -8,3 +8,15 @@
   to = "https://llms-ads.de/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "https://llm-ads.de/*"
+  to = "https://llms-ads.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.llm-ads.de/*"
+  to = "https://llms-ads.de/:splat"
+  status = 301
+  force = true
