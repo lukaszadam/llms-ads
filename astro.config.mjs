@@ -5,6 +5,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://llm-ads.de',
   integrations: [sitemap({
-    filter: (page) => !page.includes('/danke'),
+    filter: (page) => !page.includes('/danke') && !page.includes('/thanks'),
+    i18n: {
+      defaultLocale: 'de',
+      locales: { de: 'de', en: 'en' },
+    },
   })],
 });

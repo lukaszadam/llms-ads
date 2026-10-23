@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Locale } from '../i18n/de';
+
+interface Props {
+  t: Locale;
+  alternates: { de: string; en: string };
+}
+
+const { t, alternates } = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": t.lang,
+  "mainEntity": t.faq.items.map(([q, a]) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+---
+
+<Layout t={t} title={t.title} description={t.description} alternates={alternates} extraJsonLd={[faqSchema]}>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-left">
+        <h1>{t.hero.h1}</h1>
+        <p class="hero-sub">{t.hero.p1}</p>
+        <p class="hero-sub">{t.hero.p2}</p>
+        <div class="hero-ctas">
+          <a href="#gespraech" class="btn-primary">{t.hero.primary}</a>
+          <a href="#wie-es-funktioniert" class="btn-ghost">{t.hero.secondary}</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <h2 class="services-heading">{t.hero.servicesHeading}</h2>
+        <div class="feature-grid" id="was-wir-machen">
+          {t.hero.features.map((f) => (
+            <div class="feature">
+              <span class="icon" set:html={f.icon} />
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="container narrow">
+      <p class="eyebrow">{t.problem.eyebrow}</p>
+      <h2>{t.problem.h2}</h2>
+      {t.problem.before.map((p) => <p>{p}</p>)}
+      <div class="quotes">
+        {t.problem.quotes.map((q) => <blockquote>{q}</blockquote>)}
+      </div>
+      {t.problem.after.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- ÜBER MICH -->
+  <section class="about" id="ueber-mich">
+    <div class="container narrow">
+      <p class="eyebrow">{t.about.eyebrow}</p>
+      <h2>{t.about.h2}</h2>
+      <p>{t.about.p}</p>
+      <h3 style="margin-top: 2rem;">{t.about.whyHeading}</h3>
+      <ul class="why-list">
+        {t.about.why.map(([lead, text]) => <li><strong>{lead}</strong> {text}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- WARUM JETZT -->
+  <section class="why-now">
+    <div class="container narrow">
+      <p class="eyebrow">{t.whyNow.eyebrow}</p>
+      <h2>{t.whyNow.h2}</h2>
+      {t.whyNow.p.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- FÜR WEN -->
+  <section class="for-whom">
+    <div class="container">
+      <p class="eyebrow">{t.forWhom.eyebrow}</p>
+      <h2>{t.forWhom.h2}</h2>
+      <p style="max-width: 680px; margin-bottom: 2.5rem;">{t.forWhom.intro}</p>
+      <div class="audience-grid">
+        {t.forWhom.items.map(([title, text]) => (
+          <div class="audience-item">
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EINWÄNDE -->
+  <section class="objections">
+    <div class="container narrow">
+      <p class="eyebrow">{t.objections.eyebrow}</p>
+      <div class="objection-list">
+        {t.objections.items.map(([q, a]) => (
+          <div class="objection">
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WIE ES FUNKTIONIERT -->
+  <section class="how-it-works" id="wie-es-funktioniert">
+    <div class="container narrow">
+      <p class="eyebrow">{t.how.eyebrow}</p>
+      <h2>{t.how.h2}</h2>
+      <div class="steps">
+        {t.how.steps.map(([title, text], i) => (
+          <div class="step">
+            <span class="step-num">{i + 1}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + FORM -->
+  <section class="cta-section" id="gespraech">
+    <div class="container narrow center">
+      <p class="eyebrow">{t.cta.eyebrow}</p>
+      <h2>{t.cta.h2}</h2>
+      {t.cta.p.map((p) => <p>{p}</p>)}
+    </div>
+    <div class="container narrow">
+      <form class="contact-form" name={t.formName} method="POST" data-netlify="true" action={t.thanksPath}>
+        <input type="hidden" name="form-name" value={t.formName} />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">{t.cta.form.name}</label>
+            <input type="text" id="name" name="name" placeholder={t.cta.form.namePh} required />
+          </div>
+          <div class="form-group">
+            <label for="email">{t.cta.form.email}</label>
+            <input type="email" id="email" name="email" placeholder={t.cta.form.emailPh} required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="unternehmen">{t.cta.form.company}</label>
+          <input type="text" id="unternehmen" name="unternehmen" placeholder={t.cta.form.companyPh} />
+        </div>
+        <div class="form-group">
+          <label for="nachricht">{t.cta.form.message}</label>
+          <textarea id="nachricht" name="nachricht" rows="4" placeholder={t.cta.form.messagePh}></textarea>
+        </div>
+        <button type="submit" class="btn-primary large">{t.cta.form.submit}</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container narrow">
+      <p class="eyebrow">{t.faq.eyebrow}</p>
+      <div class="faq-list">
+        {t.faq.items.map(([q, a]) => (
+          <div class="faq-item">
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

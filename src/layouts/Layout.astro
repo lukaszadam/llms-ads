@@ -1,66 +1,85 @@
 ---
 import '../styles/global.css';
+import { de } from '../i18n/de';
+import { en } from '../i18n/en';
+import type { Locale } from '../i18n/de';
 
 interface Props {
+  t: Locale;
   title: string;
   description: string;
   canonical?: string;
   ogImage?: string;
   type?: 'website' | 'article';
   pubDate?: string;
+  // Path of the same page in each language, used for hreflang and the language switcher
+  alternates: { de: string; en: string };
+  extraJsonLd?: object[];
 }
 
 const {
+  t,
   title,
   description,
   canonical,
-  ogImage = '/og-default.jpg',
   type = 'website',
   pubDate,
+  alternates,
+  extraJsonLd = [],
 } = Astro.props;
 
 const siteUrl = 'https://llm-ads.de';
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
-const fullTitle = title === 'ChatGPT Ads Agentur' ? title : `${title} | ChatGPT Ads Agentur`;
+const abs = (path: string) => new URL(path, siteUrl).href;
+const canonicalUrl = canonical ?? abs(Astro.url.pathname);
+const otherLocale = t.lang === 'de' ? en : de;
+const otherPath = t.lang === 'de' ? alternates.en : alternates.de;
+const years = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={t.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>{fullTitle}</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="de" href={abs(alternates.de)} />
+    <link rel="alternate" hreflang="en" href={abs(alternates.en)} />
+    <link rel="alternate" hreflang="x-default" href={abs(alternates.de)} />
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="cQwyivmFWo8ojtSrXIbhLB9reMUI-xM_6GTzrIFgQjg" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
-    <meta property="og:title" content={fullTitle} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content="ChatGPT Ads Agentur" />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={t.siteName} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:locale:alternate" content={otherLocale.ogLocale} />
     {pubDate && <meta property="article:published_time" content={pubDate} />}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": type === 'article' ? "Article" : "ProfessionalService",
-      "name": "ChatGPT Ads Agentur",
-      "url": siteUrl,
-      "description": "Wir sorgen dafür, dass dein Unternehmen in den Antworten von ChatGPT, Gemini und Co. auftaucht.",
-      "areaServed": "DE",
-      "availableLanguage": "Deutsch",
+      "name": t.siteName,
+      "url": abs(t.homePath),
+      "description": t.schemaDescription,
+      "areaServed": t.areaServed,
+      "availableLanguage": ["Deutsch", "English"],
+      "inLanguage": t.lang,
+      "founder": { "@type": "Person", "name": "Lukasz" },
     })} />
+    {extraJsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -71,12 +90,19 @@ const fullTitle = title === 'ChatGPT Ads Agentur' ? title : `${title} | ChatGPT 
   <body>
     <nav>
       <div class="nav-inner">
-        <a href="/" class="logo">ChatGPT Ads Agentur</a>
+        <a href={t.homePath} class="logo">{t.nav.logo}</a>
         <div class="nav-links">
-          <a href="/#was-wir-machen">Leistungen</a>
-          <a href="/#wie-es-funktioniert">So funktioniert's</a>
+          <a href={`${t.homePath}#was-wir-machen`}>{t.nav.services}</a>
+          <a href={`${t.homePath}#ueber-mich`}>{t.nav.about}</a>
+          <a href={`${t.homePath}#wie-es-funktioniert`}>{t.nav.how}</a>
         </div>
-        <a href="/#gespraech" class="btn-nav">Kostenloses Erstgespräch</a>
+        <div class="nav-right">
+          <div class="lang-switch" role="group" aria-label={t.nav.switchLabel}>
+            <span class="lang-current" aria-current="true">{t.nav.currentShort}</span>
+            <a href={otherPath} hreflang={otherLocale.hreflang} lang={otherLocale.lang} title={t.nav.otherLangName} aria-label={t.nav.otherLangName}>{t.nav.otherLangShort}</a>
+          </div>
+          <a href={`${t.homePath}#gespraech`} class="btn-nav">{t.nav.cta}</a>
+        </div>
       </div>
     </nav>
 
@@ -84,10 +110,10 @@ const fullTitle = title === 'ChatGPT Ads Agentur' ? title : `${title} | ChatGPT 
 
     <footer>
       <div class="container">
-        <span>© {new Date().getFullYear()} ChatGPT Ads Agentur</span>
+        <span>© {years} {t.footer.copy}</span>
         <div class="footer-links">
-          <a href="/impressum">Impressum</a>
-          <a href="/datenschutz">Datenschutz</a>
+          <a href="/impressum">{t.footer.imprint}</a>
+          <a href="/datenschutz">{t.footer.privacy}</a>
         </div>
       </div>
     </footer>

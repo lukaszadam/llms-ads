@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Locale } from '../i18n/de';
+
+interface Props {
+  t: Locale;
+  alternates: { de: string; en: string };
+}
+
+const { t, alternates } = Astro.props;
+---
+
+<Layout t={t} title={t.thanks.title} description={t.thanks.description} alternates={alternates}>
+  <section style="padding: 8rem 2rem; text-align: center;">
+    <div class="container narrow center">
+      <p class="eyebrow">{t.thanks.eyebrow}</p>
+      <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem);">{t.thanks.h1}</h1>
+      <p style="margin-bottom: 2rem;">{t.thanks.p}</p>
+      <a href={t.homePath} class="btn-primary">{t.thanks.back}</a>
+    </div>
+  </section>
+</Layout>
