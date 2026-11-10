@@ -144,8 +144,9 @@ const faqSchema = {
       {t.cta.p.map((p) => <p>{p}</p>)}
     </div>
     <div class="container narrow">
-      <form class="contact-form" name={t.formName} method="POST" data-netlify="true" action={t.thanksPath}>
+      <form class="contact-form" name={t.formName} method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action={t.thanksPath}>
         <input type="hidden" name="form-name" value={t.formName} />
+        <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
         <div class="form-row">
           <div class="form-group">
             <label for="name">{t.cta.form.name}</label>
