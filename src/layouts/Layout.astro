@@ -90,7 +90,7 @@ const years = new Date().getFullYear();
   <body>
     <nav>
       <div class="nav-inner">
-        <a href={t.homePath} class="logo">{t.nav.logo}</a>
+        <a href={t.lang === 'de' ? '/' : '/en/'} class="logo">{t.nav.logo}</a>
         <div class="nav-links">
           <a href={`${t.homePath}#was-wir-machen`}>{t.nav.services}</a>
           {(t.nav as any).useCases && <a href={`${t.homePath}#anwendungsfaelle`}>{(t.nav as any).useCases}</a>}
