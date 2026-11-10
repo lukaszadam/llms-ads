@@ -1,0 +1,7 @@
+---
+import Automation from '../../components/Automation.astro';
+import { de } from '../../i18n/de';
+import { automationDe, automationEn } from '../../i18n/automation';
+---
+
+<Automation base={de} a={automationDe} alternates={{ de: automationDe.path, en: automationEn.path }} />

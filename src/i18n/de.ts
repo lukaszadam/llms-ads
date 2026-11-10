@@ -28,6 +28,7 @@ export const de = {
     copy: 'Lukasz – ChatGPT Ads Freelancer',
     imprint: 'Impressum',
     privacy: 'Datenschutz',
+    crossLink: ['KI Automatisierung Freelancer', '/ki-automatisierung-freelancer/'],
   },
   hero: {
     h1: 'ChatGPT Ads Freelancer: Gefunden werden, wo andere suchen.',

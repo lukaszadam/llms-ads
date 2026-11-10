@@ -93,6 +93,7 @@ const years = new Date().getFullYear();
         <a href={t.homePath} class="logo">{t.nav.logo}</a>
         <div class="nav-links">
           <a href={`${t.homePath}#was-wir-machen`}>{t.nav.services}</a>
+          {(t.nav as any).useCases && <a href={`${t.homePath}#anwendungsfaelle`}>{(t.nav as any).useCases}</a>}
           <a href={`${t.homePath}#ueber-mich`}>{t.nav.about}</a>
           <a href={`${t.homePath}#wie-es-funktioniert`}>{t.nav.how}</a>
         </div>
@@ -112,6 +113,7 @@ const years = new Date().getFullYear();
       <div class="container">
         <span>© {years} {t.footer.copy}</span>
         <div class="footer-links">
+          {(t.footer as any).crossLink && <a href={(t.footer as any).crossLink[1]}>{(t.footer as any).crossLink[0]}</a>}
           <a href="/impressum">{t.footer.imprint}</a>
           <a href="/datenschutz">{t.footer.privacy}</a>
         </div>

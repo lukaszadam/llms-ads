@@ -30,6 +30,7 @@ export const en: Locale = {
     copy: 'Lukasz – ChatGPT Ads Freelancer',
     imprint: 'Legal notice',
     privacy: 'Privacy policy',
+    crossLink: ['AI Automation Freelancer', '/en/ai-automation-freelancer/'],
   },
   hero: {
     h1: 'ChatGPT Ads Freelancer: Be found where people search.',

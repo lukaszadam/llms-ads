@@ -35,17 +35,21 @@ const faqSchema = {
           <a href="#wie-es-funktioniert" class="btn-ghost">{t.hero.secondary}</a>
         </div>
       </div>
-      <div class="hero-right">
-        <h2 class="services-heading">{t.hero.servicesHeading}</h2>
-        <div class="feature-grid" id="was-wir-machen">
-          {t.hero.features.map((f) => (
-            <div class="feature">
-              <span class="icon" set:html={f.icon} />
-              <h3>{f.title}</h3>
-              <p>{f.text}</p>
-            </div>
-          ))}
-        </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section class="services" id="leistungen">
+    <div class="container">
+      <h2 class="services-heading">{t.hero.servicesHeading}</h2>
+      <div class="feature-grid" id="was-wir-machen">
+        {t.hero.features.map((f) => (
+          <div class="feature">
+            <span class="icon" set:html={f.icon} />
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>

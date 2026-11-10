@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Locale } from '../i18n/de';
+import type { AutomationContent } from '../i18n/automation';
+
+interface Props {
+  base: Locale;
+  a: AutomationContent;
+  alternates: { de: string; en: string };
+}
+
+const { base, a, alternates } = Astro.props;
+
+// Locale for the layout: shared base (language, thanks page, form labels) with page-specific branding
+const t = {
+  ...base,
+  homePath: a.path,
+  siteName: a.siteName,
+  schemaDescription: a.schemaDescription,
+  nav: { ...base.nav, ...a.nav },
+  footer: { ...base.footer, copy: a.footerCopy, crossLink: a.crossLink },
+};
+const f = base.cta.form;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": base.lang,
+  "mainEntity": a.faq.items.map(([q, ans]) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": ans },
+  })),
+};
+---
+
+<Layout t={t} title={a.title} description={a.description} alternates={alternates} extraJsonLd={[faqSchema]}>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-left">
+        <h1>{a.hero.h1}</h1>
+        <p class="hero-sub">{a.hero.p1}</p>
+        <p class="hero-sub">{a.hero.p2}</p>
+        <div class="hero-ctas">
+          <a href="#gespraech" class="btn-primary">{a.hero.primary}</a>
+          <a href="#wie-es-funktioniert" class="btn-ghost">{a.hero.secondary}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section class="services" id="leistungen">
+    <div class="container">
+      <h2 class="services-heading">{a.hero.servicesHeading}</h2>
+      <div class="feature-grid" id="was-wir-machen">
+        {a.hero.features.map((x) => (
+          <div class="feature">
+            <span class="icon" set:html={x.icon} />
+            <h3>{x.title}</h3>
+            <p>{x.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="container narrow">
+      <p class="eyebrow">{a.problem.eyebrow}</p>
+      <h2>{a.problem.h2}</h2>
+      {a.problem.p.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- ANWENDUNGSFÄLLE -->
+  <section class="for-whom use-cases" id="anwendungsfaelle">
+    <div class="container">
+      <p class="eyebrow">{a.useCases.eyebrow}</p>
+      <h2>{a.useCases.h2}</h2>
+      <div class="audience-grid">
+        {a.useCases.items.map(([title, text]) => (
+          <div class="audience-item">
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER MICH -->
+  <section class="about" id="ueber-mich">
+    <div class="container narrow">
+      <p class="eyebrow">{a.about.eyebrow}</p>
+      <h2>{a.about.h2}</h2>
+      <p>{a.about.p}</p>
+      <h3 style="margin-top: 2rem;">{a.about.whyHeading}</h3>
+      <ul class="why-list">
+        {a.about.why.map(([lead, text]) => <li><strong>{lead}</strong> {text}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- DATENSCHUTZ -->
+  <section class="why-now">
+    <div class="container narrow">
+      <p class="eyebrow">{a.privacy.eyebrow}</p>
+      <h2>{a.privacy.h2}</h2>
+      {a.privacy.p.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- FÜR WEN -->
+  <section class="for-whom">
+    <div class="container">
+      <p class="eyebrow">{a.forWhom.eyebrow}</p>
+      <h2>{a.forWhom.h2}</h2>
+      <p style="max-width: 680px; margin-bottom: 2.5rem;">{a.forWhom.intro}</p>
+      <div class="audience-grid">
+        {a.forWhom.items.map(([title, text]) => (
+          <div class="audience-item">
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EINWÄNDE -->
+  <section class="objections">
+    <div class="container narrow">
+      <p class="eyebrow">{a.objections.eyebrow}</p>
+      <div class="objection-list">
+        {a.objections.items.map(([q, ans]) => (
+          <div class="objection">
+            <h3>{q}</h3>
+            <p>{ans}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WIE ES FUNKTIONIERT -->
+  <section class="how-it-works" id="wie-es-funktioniert">
+    <div class="container narrow">
+      <p class="eyebrow">{a.how.eyebrow}</p>
+      <h2>{a.how.h2}</h2>
+      <div class="steps">
+        {a.how.steps.map(([title, text], i) => (
+          <div class="step">
+            <span class="step-num">{i + 1}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + FORM -->
+  <section class="cta-section" id="gespraech">
+    <div class="container narrow center">
+      <p class="eyebrow">{a.cta.eyebrow}</p>
+      <h2>{a.cta.h2}</h2>
+      {a.cta.p.map((p) => <p>{p}</p>)}
+    </div>
+    <div class="container narrow">
+      <form class="contact-form" name={a.formName} method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action={base.thanksPath}>
+        <input type="hidden" name="form-name" value={a.formName} />
+        <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">{f.name}</label>
+            <input type="text" id="name" name="name" placeholder={f.namePh} required />
+          </div>
+          <div class="form-group">
+            <label for="email">{f.email}</label>
+            <input type="email" id="email" name="email" placeholder={f.emailPh} required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="unternehmen">{f.company}</label>
+          <input type="text" id="unternehmen" name="unternehmen" placeholder={f.companyPh} />
+        </div>
+        <div class="form-group">
+          <label for="nachricht">{a.cta.messageLabel}</label>
+          <textarea id="nachricht" name="nachricht" rows="4" placeholder={a.cta.messagePh}></textarea>
+        </div>
+        <button type="submit" class="btn-primary large">{a.cta.submit}</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container narrow">
+      <p class="eyebrow">{a.faq.eyebrow}</p>
+      <div class="faq-list">
+        {a.faq.items.map(([q, ans]) => (
+          <div class="faq-item">
+            <h3>{q}</h3>
+            <p>{ans}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
