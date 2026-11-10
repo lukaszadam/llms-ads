@@ -6,7 +6,7 @@ export const de = {
   thanksPath: '/danke/',
   formName: 'erstgespraech',
   siteName: 'ChatGPT Ads Freelancer Lukasz',
-  title: 'ChatGPT Ads Freelancer Frankfurt & GEO – KI-Sichtbarkeit | Lukasz',
+  title: 'ChatGPT Ads Freelancer & GEO – KI-Sichtbarkeit | Lukasz',
   description:
     'ChatGPT Ads Freelancer in Frankfurt: Dein Unternehmen in den Antworten von ChatGPT, Gemini & Co. – organisch (GEO) und mit ChatGPT Ads. Jetzt kostenloses Erstgespräch sichern.',
   schemaDescription:
@@ -28,7 +28,7 @@ export const de = {
     copy: 'Lukasz – ChatGPT Ads Freelancer',
     imprint: 'Impressum',
     privacy: 'Datenschutz',
-    crossLink: ['KI Automatisierung Freelancer', '/ki-automatisierung-freelancer/'],
+    crossLink: ['KI Automatisierung', '/ki-automatisierung-freelancer/'],
   },
   hero: {
     h1: 'ChatGPT Ads Freelancer: Gefunden werden, wo andere suchen.',

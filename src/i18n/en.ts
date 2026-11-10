@@ -8,7 +8,7 @@ export const en: Locale = {
   thanksPath: '/en/thanks/',
   formName: 'erstgespraech-en',
   siteName: 'ChatGPT Ads Freelancer Lukasz',
-  title: 'ChatGPT Ads Freelancer Frankfurt & GEO – AI Search Visibility | Lukasz',
+  title: 'ChatGPT Ads Freelancer & GEO – AI Search Visibility | Lukasz',
   description:
     'ChatGPT Ads freelancer in Frankfurt: get your business into the answers of ChatGPT, Gemini & co. – organically (GEO) and with ChatGPT Ads. Book your free intro call.',
   schemaDescription:
@@ -30,7 +30,7 @@ export const en: Locale = {
     copy: 'Lukasz – ChatGPT Ads Freelancer',
     imprint: 'Legal notice',
     privacy: 'Privacy policy',
-    crossLink: ['AI Automation Freelancer', '/en/ai-automation-freelancer/'],
+    crossLink: ['AI Automation', '/en/ai-automation-freelancer/'],
   },
   hero: {
     h1: 'ChatGPT Ads Freelancer: Be found where people search.',

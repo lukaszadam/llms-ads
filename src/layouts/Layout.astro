@@ -96,6 +96,7 @@ const years = new Date().getFullYear();
           {(t.nav as any).useCases && <a href={`${t.homePath}#anwendungsfaelle`}>{(t.nav as any).useCases}</a>}
           <a href={`${t.homePath}#ueber-mich`}>{t.nav.about}</a>
           <a href={`${t.homePath}#wie-es-funktioniert`}>{t.nav.how}</a>
+          {(t.footer as any).crossLink && <a href={(t.footer as any).crossLink[1]} class="nav-cross">{(t.footer as any).crossLink[0]}</a>}
         </div>
         <div class="nav-right">
           <div class="lang-switch" role="group" aria-label={t.nav.switchLabel}>

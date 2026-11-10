@@ -7,7 +7,7 @@ export const automationDe = {
     'KI Automatisierung Freelancer für den DACH-Raum: Ich automatisiere deine Workflows mit KI-Agenten, n8n, Make und ChatGPT – DSGVO-konform, messbar, remote. Kostenloses Erstgespräch.',
   schemaDescription:
     'KI Automatisierung Freelancer und Spezialist für Prozessautomatisierung: Workflows, KI-Agenten, Chatbots und Dokumentenverarbeitung mit n8n, Make und Sprachmodellen – DSGVO-konform, remote im DACH-Raum.',
-  nav: { logo: 'KI Automatisierung Freelancer Lukasz', services: 'Leistungen', useCases: 'Anwendungsfälle', about: 'Über mich', how: 'So funktioniert’s', cta: 'Kostenloses Erstgespräch' },
+  nav: { logo: 'KI Automatisierung Lukasz', services: 'Leistungen', useCases: 'Anwendungsfälle', about: 'Über mich', how: 'So funktioniert’s', cta: 'Kostenloses Erstgespräch' },
   footerCopy: 'Lukasz – KI Automatisierung Freelancer',
   crossLink: ['ChatGPT Ads & GEO', '/'],
   hero: {
@@ -133,7 +133,7 @@ export const automationEn: AutomationContent = {
     'AI automation freelancer for the DACH region: I automate your workflows with AI agents, n8n, Make and ChatGPT – GDPR-compliant, measurable, remote. Free intro call.',
   schemaDescription:
     'AI automation freelancer and process automation specialist: workflows, AI agents, chatbots and document processing with n8n, Make and language models – GDPR-compliant, remote across the DACH region.',
-  nav: { logo: 'AI Automation Freelancer Lukasz', services: 'Services', useCases: 'Use cases', about: 'About me', how: 'How it works', cta: 'Free intro call' },
+  nav: { logo: 'AI Automation Lukasz', services: 'Services', useCases: 'Use cases', about: 'About me', how: 'How it works', cta: 'Free intro call' },
   footerCopy: 'Lukasz – AI Automation Freelancer',
   crossLink: ['ChatGPT Ads & GEO', '/en/'],
   hero: {
